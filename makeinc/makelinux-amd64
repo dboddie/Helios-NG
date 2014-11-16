@@ -2,7 +2,7 @@
 # Make Helios/TRAN on Linux
 
 export HPROC=TRAN
-export HHOST=LINUX
+export HHOST=LINUX_AMD64
 
 export HSRC=/giga/HeliosRoot/Helios-NG
 
@@ -24,8 +24,8 @@ export HOSTINCLUDE=$HSRC/hostinclude
 
 export NEW_NCC=OLD_TRAN
 
-if [ -d LINUX ]; then
-	cd LINUX; make $*
+if [ -d LINUX_AMD64 ]; then
+	cd LINUX_AMD64; make $*
 else
        	make $*
 fi
