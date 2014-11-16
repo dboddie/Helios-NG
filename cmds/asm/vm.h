@@ -1,5 +1,6 @@
 /* $Id: vm.h,v 1.4 1992/09/25 10:41:21 paul Exp $ */
 
+#include "ttypes.h"
 
 #define VMmask		0xf
 #define VMswapped	1

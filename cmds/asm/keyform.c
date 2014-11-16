@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-#define TABSIZE 5000
+#define TABSIZE 10000
 
 INT 			dicttab[ GLOBAL_HASHSIZE ];
 INT 			ccount[  GLOBAL_HASHSIZE ];

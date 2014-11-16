@@ -56,9 +56,9 @@ OBJECTS		=  asm.o gencode.o genimage.o growdata.o growcode.o keytab.o \
 		vm.o queue.o
 
 # C source files
-SOURCES.c	= ../asm.c ../gencode.c ../genimage.c ../gencsc.c ../growcode.c ../keyform.c \
+SOURCES.c	= ../asm.c ../gencode.c ../genimage.c ../gencsc.c ../growcode.c keytab.c \
 		../objed.c ../lex.c ../mem.c ../module.c ../preasm.c ../sym.c ../syn.c ../encode.c \
-		../vm.c ../growdata.c ../objdump.c
+		../vm.c ../growdata.c
 
 # C header files
 HEADERS.c	= ../asm.h ../vm.h
@@ -82,15 +82,15 @@ $(OBJECTS) : asm.h vm.h
 #keytab.o : keyform.o keyform keytab.c 
 
 keytab.c : keyform
-	keyform
+	$(HSRC)/$(COMPONENT)/$(HHOST)/keyform
 
 keyform : keyform.c
-	$(HOSTCC) $< $(LOCALHOSTCFLAGS) -DSWAPKEYTABLE -Bstatic -o keyform
+	$(HOSTCC) $< $(HOSTCFLAGS) -DSWAPKEYTABLE -Bstatic -o keyform
 
 objdump : objdump.c
 	$(HOSTCC) $< $(HOSTCFLAGS) -Bstatic -o objdump
 
-asm :	$(OBJECTS)
+asm :	$(OBJECTS) keytab.c
 	$(HOSTCC) -Bstatic -o asm $(HOSTCFLAGS) $(SOURCES)
 
 

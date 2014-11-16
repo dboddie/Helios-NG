@@ -33,6 +33,12 @@ PRIVATE  void outbyte();
 PRIVATE  void outbyte1();
 PRIVATE  void flushrec();
 PRIVATE  void wbyte();
+PRIVATE cscheader(imagesize);
+PRIVATE putitem(op, opd);
+PRIVATE putstep(opd);
+PRIVATE outword(val);
+
+extern Code* codebase;
 
 /****************************************************************/
 /* Procedure: gencsc                                            */
@@ -59,7 +65,7 @@ PUBLIC gencsc()
 
 		if( tag == s_newseg ) 
 		{
-			code = (struct code *)code->value;
+			code = (Code *)(code->value.w);
 			continue;
 		}
 
@@ -67,7 +73,7 @@ PUBLIC gencsc()
 
                 if( 0 <= tag && tag <= 15 )     /* a direct operation */
                 {
-                        WORD val = eval((WORD)code->vtype,(WORD)code->value,(WORD)pc+code->size);
+                        WORD val = eval((WORD)code->vtype,(WORD)code->value.w,(WORD)pc+code->size);
                         trace("%8x: Fn %2x %2x %8x",pc,tag,etype,val);
                         /* El Grando Kludgerama - under certain pathalogical
                            curcumstances we have to generate a value in one
@@ -84,12 +90,12 @@ PUBLIC gencsc()
                 switch( (int)tag )
                 {
                 case s_module:
-                        curmod = (struct asm_Module *)(code->value);
-                        trace("MODULE: %x %d",curmod,curmod->id);
+                        curmod = code->value.v;
+                        trace("MODULE: %x %d",curmod,VMAddr(asm_Module,curmod)->id);
                         break;
 
 		case s_newfile:
-			strcpy(infile,code->value);
+			strcpy(infile,(const char *)code->value.c);
 			break;
 
                 case s_bss:
@@ -100,27 +106,27 @@ PUBLIC gencsc()
                 case s_literal:
                         trace("%8x: CODE %d",pc,code->size);
                         for( i = 0; i < code->size ; i++ )
-                                outbyte(((UBYTE *)(&code->value))[i]);
+                                outbyte(((UBYTE *)(&code->value.b))[i]);
                         break;
 
                 case s_code:
                         trace("%8x: CODE %d",pc,code->size);
                         for( i = 0; i < code->size ; i++ )
-                                outbyte(((UBYTE *)(code->value))[i]);
+                                outbyte(((UBYTE *)(code->value.b))[i]);
                         break;
 
                 case s_init:
                         trace("%8x: INIT",pc);
-                        if( code->value == NULL ) outword(0);
+                        if( code->value.w == NULL ) outword(0);
                         else {
-                                WORD next = ((struct code *)(code->value))->loc;
+                                WORD next = ((struct code *)(code->value.w))->loc;
                                 outword(next-pc);
                         }
                         break;
 
                 case s_word:
                 {
-                        WORD val = eval((WORD)code->vtype,(WORD)code->value,(WORD)pc);
+                        WORD val = eval((WORD)code->vtype,(WORD)code->value.w,(WORD)pc);
                         trace("%8x: WORD %2x %8x",pc,etype,val);
                         if( asize(pc) != 0 ) warn("WORD not on word boundary");
                         /* default to val */

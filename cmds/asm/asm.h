@@ -80,6 +80,7 @@ extern WORD traceflags;
 #define db_sym	     0x1000
 #define db_modules   0x2000
 #define db_refs	     0x4000
+#define db_gencsc    0x8000
 
 /* warning flags */
 extern WORD warnflags;

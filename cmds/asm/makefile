@@ -93,8 +93,8 @@ SOURCES		= $(SOURCES.c) $(SOURCES.a) \
 
 # C source files
 SOURCES.c	= asm.c gencode.c genimage.c gencsc.c growcode.c \
-                   keyform.c objed.c lex.c mem.c module.c preasm.c \
-                   sym.c syn.c encode.c vm.c growdata.c objdump.c
+                   keytab.c objed.c lex.c mem.c module.c preasm.c \
+                   sym.c syn.c encode.c vm.c growdata.c
 #  keytab.c is automatically generated
 
 OBJECTS		= asm.o gencode.o genimage.o growdata.o growcode.o keytab.o \
@@ -155,7 +155,7 @@ keytab.c : keyform
 keyform : keyform.c
 	$(HOSTCC) $< $(HOSTCFLAGS) -o keyform
 
-asm:  $(OBJECTS)
+asm:  $(OBJECTS) keytab.c
 	$(ASM) -v -f -s20000 -h4000 -nasm -mvmfile $(CSTART) $(OBJECTS) -oasm
 
 

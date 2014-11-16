@@ -17,9 +17,16 @@
 #include <string.h>
 #include <stdlib.h>
 #else /* !__DOS386 */
+#if !defined(LINUX)
 #include <strings.h>
 #include <sys/file.h>
+#endif
 #endif /* __DOS386 */
+#endif
+
+#if defined(LINUX)
+#include <fcntl.h>
+#include <module.h>
 #endif
 
 #ifndef O_BINARY
@@ -271,7 +278,7 @@ VMRef v;
 	  ) 
 	{
 		char *name = "VMSwap";
-#if !defined(SUN4) && !defined(RS6000) && !defined(__DOS386)
+#if !defined(SUN4) && !defined(RS6000) && !defined(__DOS386) && !defined(LINUX)
 		word *p = (word *)&v;
 		Proc *proc;
 		p = (word *)(p[-2]);
