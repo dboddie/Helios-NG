@@ -21,7 +21,7 @@ ifndef HHOSTBIN
 endif
 
 ifndef GCCINCLUDE
- GCCINCLUDE = /usr/lib/gcc/x86_64-redhat-linux/4.4.4/include
+ GCCINCLUDE = /usr/include
 endif
 
 #-----------------------------------------------------------------------------
@@ -50,7 +50,7 @@ else
 #  HOSTCFLAGS := $(HOSTCFLAGS)  -D$(HHOST) -D__SMT \
 #		-D_POSIX_SOURCE -D__$(HPROC) -D__HELIOS$(HPROC)
   HOSTCFLAGS := $(HOSTCFLAGS) -ansi -pipe -O -D$(HHOST) \
-        -D__$(HPROC) -D__HELIOS$(HPROC)
+        -D__$(HPROC) -D__HELIOS$(HPROC) -I$(HOSTINCLUDE)
 
 endif
 

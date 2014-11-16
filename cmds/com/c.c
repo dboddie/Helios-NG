@@ -157,6 +157,10 @@
 #ifdef UNIX
 
 #include "queue.h"
+#include <sys/stat.h>
+#include <sys/wait.h>
+#define S_IFREG  __S_IFREG
+#define pid_t    __pid_t
 
 #ifndef true
 

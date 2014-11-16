@@ -75,11 +75,11 @@ SOURCES.odd	:= makefile
 
 # system image (nucleus) construction tool
 sysbuild : sysbuild.c
-	$(HOSTCC) -o $@ $(HOSTCFLAGS) -I$(GCCINCLUDE) -I/usr/include -I$(INCLUDE) $<
+	$(HOSTCC) -o $@ $(HOSTCFLAGS) -I$(GCCINCLUDE) -I/usr/include $< ../../support/getargs.c
 
 # Helios object editor (display/change a program's stack/heap/name)
 objed : objed.c
-	$(HOSTCC) -o $@ $(HOSTCFLAGS) -I$(GCCINCLUDE) -I/usr/include -I$(INCLUDE) $<
+	$(HOSTCC) -o $@ $(HOSTCFLAGS) -I$(GCCINCLUDE) -I/usr/include $<
 
 # Helios keyboard /console server keymap builder
 buildkeymap : $(CMDS)/com/buildkeymap.c
@@ -87,7 +87,7 @@ buildkeymap : $(CMDS)/com/buildkeymap.c
 
 # system image (nucleus) construction tool for C40 world
 sysbuildc40 : sysbuild.c
-	$(HOSTCC) -o $@ $(HOSTCFLAGS) -U__TRAN -U__HELIOSTRAN -D__C40 -D__HELIOSC40 -I/usr/include -I$(INCLUDE) $<
+	$(HOSTCC) -o $@ $(HOSTCFLAGS) -U__TRAN -U__HELIOSTRAN -D__C40 -D__HELIOSC40 -I/usr/include $<
 
 
 #---------------------------------------------------------------------------
@@ -147,7 +147,7 @@ WHERE := -DC_COMPILER=\"nc\" \
 	-DMACDIR=\"$(HSRC)/include/ampp/\" 
 
 c : c.c queue.c
-	$(HOSTCC) $(HOSTCFLAGS) -Bstatic -o c -I$(CMDS)/support $(WHERE) -DUNIX  $^
+	$(HOSTCC) $(HOSTCFLAGS) -I$(GCCINCLUDE) -Bstatic -o c -I$(CMDS)/support $(WHERE) -DUNIX  $^
 
 
 #-----------------------------------------------------------------------------

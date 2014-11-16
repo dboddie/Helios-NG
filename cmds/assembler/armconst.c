@@ -33,6 +33,183 @@ similar code for J_ADDR (lea), look in ncc/cc349/arm/gen.c.
 */
 
 
+/* Taken from cmds/cc/ncc/cc450/c40/ops.h */
+
+/* 2-bit binary abbreviations */
+
+#define B_00			0x00U
+#define B_01			0x01U
+#define B_10			0x02U
+#define B_11			0x03U
+
+
+/* 3-bit binary abbreviations */
+
+#define B_000			0x00U
+#define B_001			0x01U
+#define B_010			0x02U
+#define B_011			0x03U
+#define B_100			0x04U
+#define B_101			0x05U
+#define B_110			0x06U
+#define B_111			0x07U
+
+
+/* 4-bit binary abbreviations */
+
+#define B_0000			0x00U
+#define B_0001			0x01U
+#define B_0010			0x02U
+#define B_0011			0x03U
+#define B_0100			0x04U
+#define B_0101			0x05U
+#define B_0110			0x06U
+#define B_0111			0x07U
+#define B_1000			0x08U
+#define B_1001			0x09U
+#define B_1010			0x0aU
+#define B_1011			0x0bU
+#define B_1100			0x0cU
+#define B_1101			0x0dU
+#define B_1110			0x0eU
+#define B_1111			0x0fU
+
+
+/* 5-bit binary abbreviations */
+
+#define B_00000			0x00U
+#define B_00001			0x01U
+#define B_00010			0x02U
+#define B_00011			0x03U
+#define B_00100			0x04U
+#define B_00101			0x05U
+#define B_00110			0x06U
+#define B_00111			0x07U
+#define B_01000			0x08U
+#define B_01001			0x09U
+#define B_01010			0x0aU
+#define B_01011			0x0bU
+#define B_01100			0x0cU
+#define B_01101			0x0dU
+#define B_01110			0x0eU
+#define B_01111			0x0fU
+#define B_10000			0x10U
+#define B_10001			0x11U
+#define B_10010			0x12U
+#define B_10011			0x13U
+#define B_10100			0x14U
+#define B_10101			0x15U
+#define B_10110			0x16U
+#define B_10111			0x17U
+#define B_11000			0x18U
+#define B_11001			0x19U
+#define B_11010			0x1aU
+#define B_11011			0x1bU
+#define B_11100			0x1cU
+#define B_11101			0x1dU
+#define B_11110			0x1eU
+#define B_11111			0x1fU
+
+
+/* 6-bit binary abbreviations */
+
+#define B_000000		0x00U
+#define B_000001		0x01U
+#define B_000010		0x02U
+#define B_000011		0x03U
+#define B_000100		0x04U
+#define B_000101		0x05U
+#define B_000110		0x06U
+#define B_000111		0x07U
+#define B_001000		0x08U
+#define B_001001		0x09U
+#define B_001010		0x0aU
+#define B_001011		0x0bU
+#define B_001100		0x0cU
+#define B_001101		0x0dU
+#define B_001110		0x0eU
+#define B_001111		0x0fU
+#define B_010000		0x10U
+#define B_010001		0x11U
+#define B_010010		0x12U
+#define B_010011		0x13U
+#define B_010100		0x14U
+#define B_010101		0x15U
+#define B_010110		0x16U
+#define B_010111		0x17U
+#define B_011000		0x18U
+#define B_011001		0x19U
+#define B_011010		0x1aU
+#define B_011011		0x1bU
+#define B_011100		0x1cU
+#define B_011101		0x1dU
+#define B_011110		0x1eU
+#define B_011111		0x1fU
+#define B_100000		0x20U
+#define B_100001		0x21U
+#define B_100010		0x22U
+#define B_100011		0x23U
+#define B_100100		0x24U
+#define B_100101		0x25U
+#define B_100110		0x26U
+#define B_100111		0x27U
+#define B_101000		0x28U
+#define B_101001		0x29U
+#define B_101010		0x2aU
+#define B_101011		0x2bU
+#define B_101100		0x2cU
+#define B_101101		0x2dU
+#define B_101110		0x2eU
+#define B_101111		0x2fU
+#define B_110000		0x30U
+#define B_110001		0x31U
+#define B_110010		0x32U
+#define B_110011		0x33U
+#define B_110100		0x34U
+#define B_110101		0x35U
+#define B_110110		0x36U
+#define B_110111		0x37U
+#define B_111000		0x38U
+#define B_111001		0x39U
+#define B_111010		0x3aU
+#define B_111011		0x3bU
+#define B_111100		0x3cU
+#define B_111101		0x3dU
+#define B_111110		0x3eU
+#define B_111111		0x3fU
+
+/* (a few( 7-bit binary abbreviations */
+
+#define B_0110000		0x30U
+
+/* (some) 8-bit binary abbreviations */
+
+#define B_01100000		0x60U
+#define B_01100001		0x61U
+#define B_01100010		0x62U
+#define B_01100011		0x63U
+#define B_01100100		0x64U
+#define B_01100101		0x65U
+#define B_01100110		0x66U
+#define B_01100111		0x67U
+#define B_01101000		0x68U
+#define B_01101001		0x69U
+#define B_01101010		0x6aU
+#define B_01101011		0x6bU
+#define B_01101100		0x6cU
+#define B_01101101		0x6dU
+#define B_01101110		0x6eU
+#define B_01101111		0x6fU
+#define B_01110000		0x70U
+#define B_01110001		0x71U
+#define B_01110010		0x72U
+#define B_01110011		0x73U
+#define B_01110100		0x74U
+#define B_01110101		0x75U
+#define B_01110110		0x76U
+#define B_01110111		0x77U
+#define B_01111000		0x78U
+
 /* taken from ncc/cc349/arm/ops.h */
 
 /* Major opcode groups                                                   */

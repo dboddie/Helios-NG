@@ -23,13 +23,16 @@
 #include <stdio.h>
 #if defined(R140) || defined(SUN4) || defined(HP) || defined(RS6000)
 # include <strings.h>
+#elif defined(LINUX)
+# include <string.h>
+# include <stdlib.h>
 #else
 # include <string.h>
 # include <stdlib.h>
 # include <posix.h>
 #endif
 
-#if defined(__HELIOS)
+#if defined(__HELIOS) || defined(LINUX)
 #include <stdarg.h>
 #else
 #include <varargs.h>
@@ -53,7 +56,7 @@ static int strtonum(char *s);
 static void rdline(FDB *fdb, char *buf);
 static int rdch(FDB *fdb);
 
-#if defined(__HELIOS)
+#if defined(__HELIOS) || defined(LINUX)
 static void tfprintf(FILE *f, char *fmt, ... );
 #else
 static void tfprintf(FILE *f, char *fmt, long va_alist );
@@ -254,7 +257,7 @@ char *name;
 
 static int tabtab[] = { 8, 20, 12, 3, 29, 2, 8 };
 
-#if defined(__HELIOS)
+#if defined(__HELIOS) || defined(LINUX)
 static void tfprintf(FILE *f, char *fmt, ...)
 {
 #else
@@ -272,7 +275,7 @@ va_dcl
 	int i;
 	int percent = 0;
 
-#if defined(__HELIOS)
+#if defined(__HELIOS) || defined(LINUX)
 	va_start(a, fmt);
 #else	
 	va_start(a);

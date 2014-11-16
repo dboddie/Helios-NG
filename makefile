@@ -888,12 +888,12 @@ ifeq ($(HPROC),TRAN)
 	@echo "				[[[ Making HOST Assembler ]]]"
 	$(MAKE) -C cmds/asm/$(HHOST) install
 else
-	ifeq ($(HHOST),HELIOSC40)
-		@echo "				[[[ Skipping HOST assembler ]]]"
-	else
+	#ifeq ($(HHOST),HELIOSC40)
+	#	@echo "				[[[ Skipping HOST assembler ]]]"
+	#else
 		@echo "				[[[ Making HOST Assembler ]]]"
 		$(MAKE) -C cmds/assembler/$(HHOST) install
-	endif
+	#endif
 endif
 
 HostHelp:
