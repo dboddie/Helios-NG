@@ -48,7 +48,7 @@ clean	:
 	-$(RM) keyform keytab.c $(OBJECTS) $(TARGETS) mkout core ../mkout install
 
 # Note all sources
-SOURCES		= $(SOURCES.c) $(HEADERS.c) $(SOURCES.odd)
+SOURCES		= $(SOURCES.c) $(HEADERS.c) # $(SOURCES.odd)
 
 # Object files ( Note that keytab.c is created from keyform.c)
 OBJECTS		=  asm.o gencode.o genimage.o growdata.o growcode.o keytab.o \
