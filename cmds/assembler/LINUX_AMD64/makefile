@@ -149,7 +149,7 @@ CPU_YYTOKENS	= -DCPU_YYTOKENS=\"toks_$(TARGET).ypp\"
 CPU_YYRULES	= -DCPU_YYRULES=\"rules_$(TARGET).ypp\"
 
 # set if you are using bison
-BISON = -DBISON
+#BISON = -DBISON
 
 # run YACC creating separate y.tab.c and y.tab.h files (-d),
 # removing #lines (-l), optionally with debugging (-t).
@@ -158,8 +158,8 @@ BISON = -DBISON
 ifdef BISON
  YACC = bison -v -d -y -l -t
 else
-# YACC = yacc -v -d #-l -t
- YACC = byacc -v -d #-l -t
+ YACC = yacc -v -d #-l -t
+# YACC = byacc -v -d #-l -t
 endif
 
 ifdef BISON

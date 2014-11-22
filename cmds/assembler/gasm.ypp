@@ -34,13 +34,12 @@
 /* Include Files: */
 
 #ifdef BISON
-#define fred \#
+#define fred #
 fred include <stdio.h>
 #undef fred
 #endif
  
 #include "gasm.h"
-
 
 /* Exported Variables: */
 
@@ -67,6 +66,7 @@ static ParseTreeItem	*LastParseTreeItem = &HeaderParseTreeItem;
 #ifdef BISON
   static void 		yyerror(char *s);
 #endif
+  static void 		yyerror(char *s);
 
 %}
 

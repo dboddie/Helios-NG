@@ -397,7 +397,7 @@ extern int		yyparse(void);
 extern ParseTreeItem	*NewParseTreeItem(int type);
 extern ConstList	*NewConstItem(int type);
 extern FloatList	*NewFloatConstItem(Dble);
-extern Patch		*NewPatchItem(int type);
+extern Patch		*NewPatch(int type);
 extern Expression	*NewExpr(Expression *le, int op, Expression *re);
 extern Expression 	*NewExprSymbRef(char *name);
 extern Expression	*NewExprNum(int num);
