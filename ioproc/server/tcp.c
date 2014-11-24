@@ -41,13 +41,17 @@
 
 #if internet_supported
 
-#if (!SM90 && !RS6000 && !HP9000 && !SCOUNIX)
+#if (!SM90 && !RS6000 && !HP9000 && !SCOUNIX && !LINUX)
 #include <sys/filio.h>
 #include <sys/socket.h>
 #include <sys/sockio.h>
 #endif
 #if (SM90)
 #include <sys/ptio.h>
+#endif
+
+#if defined(LINUX)
+#include <sys/socket.h>
 #endif
 
 #ifdef SCOUNIX
@@ -1732,8 +1736,13 @@ Conode *myco;
 	msg.msg_name = (caddr_t)&addr;
 	msg.msg_iov = &iov;
 	msg.msg_iovlen = 1;
+#if defined(LINUX)
+	msg.msg_control = NULL;	/* ignore accrights for now */
+	msg.msg_controllen = 0;
+#else
 	msg.msg_accrights = NULL;	/* ignore accrights for now */
 	msg.msg_accrightslen = 0;
+#endif
                                  /* I might have to poll later */
         AddTail(Remove(&(myco->node)), PollingCo);
         myco->timelimit = timeout + Now;
@@ -1893,12 +1902,21 @@ struct msghdr *msg;
 	msg->msg_iov->iov_len = dg->DataSize;
 	msg->msg_iovlen = 1;
 	
+#if defined(LINUX)
+	if( dg->AccRights != -1 )
+	{
+		msg->msg_control = (data+dg->AccRights+4);
+		msg->msg_controllen = swap(*(word *)(data+dg->AccRights));
+	}
+	else msg->msg_control = NULL, msg->msg_controllen = 0;
+#else
 	if( dg->AccRights != -1 )
 	{
 		msg->msg_accrights = (caddr_t)(data+dg->AccRights+4);
 		msg->msg_accrightslen = swap(*(word *)(data+dg->AccRights));
 	}
 	else msg->msg_accrights = NULL, msg->msg_accrightslen = 0;
+#endif
 }
 
 /************************************************************************/

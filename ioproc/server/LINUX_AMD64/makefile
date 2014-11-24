@@ -28,14 +28,14 @@ sys 	  = /usr/include
 LINUX = $(HSRC)/$(COMPONENT)/linux
 
 HOSTCC = cc
-HOSTCFLAGS := -pipe -O1 -DHOSTISLITTLEENDIAN -D$(HHOST) -D__$(HPROC) -D__HELIOS$(HPROC) $(HOSTCFLAGS) -DUNIX
+HOSTCFLAGS := -pipe -O1 -DHOSTISLITTLEENDIAN -D$(HHOST) -D__$(HPROC) -D__HELIOS$(HPROC) $(HOSTCFLAGS) -DUNIX -DLINUX
 
 
 #-----------------------------------------------------------------------------
 # Note all final targets here
 
-XTARGETS = server hydra hydramon serverwinxv serverwinsv serverwinxaw \
-		serverwinxt
+XTARGETS = server hydra hydramon # serverwinxv serverwinsv serverwinxaw \
+#		serverwinxt
 
 Xdefault : $(XTARGETS)
 
@@ -83,7 +83,7 @@ $(XOBJECTS) : helios.h
 # uncomment if you have compiler or makedepend generated dependencies
 #include depends
 
-HOSTCFLAGS := $(HOSTCFLAGS) -I. -I$(LINUX) -I/usr/openwin/include -Ikludge
+HOSTCFLAGS := $(HOSTCFLAGS) -I. -I$(LINUX) -I/usr/openwin/include -Ikludge -I/usr/include
 
 helios.h: $(GENHEADERS.c)
 	cat $(sys)/stdio.h $(sys)/sys/types.h $(sys)/ctype.h $(sys)/setjmp.h \
@@ -92,10 +92,11 @@ helios.h: $(GENHEADERS.c)
 	$(sys)/unistd.h $(sys)/sys/stat.h $(sys)/sys/param.h \
 	$(sys)/sys/file.h $(sys)/memory.h $(sys)/sys/vfs.h \
 	$(sys)/netinet/in.h $(sys)/netdb.h $(sys)/sys/un.h \
-	$(sys)/dirent.h  $(sys)/termio.h $(sys)/pwd.h $(sys)/sys/wait.h\
-	$(HSRC)/$(COMPONENT)/sun/sunlocal.h \
+	$(sys)/dirent.h  $(sys)/termio.h $(sys)/pwd.h $(sys)/sys/wait.h \
 	$(GENHEADERS.c) \
 	> helios.h
+
+#	$(HSRC)/$(COMPONENT)/sun/sunlocal.h \
 
 colib_link = -Bstatic colib.o -ltermcap -llwp
 colib.o : colib.c

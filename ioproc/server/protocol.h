@@ -1016,6 +1016,7 @@ typedef struct Config {
 #define	SO_OOBINLINE	0x0100		/* leave received OOB data in line */
 
 #endif
+#if !defined(UNIX)
 /*
  * Additional options, not kept in so_options.
  */
@@ -1027,11 +1028,14 @@ typedef struct Config {
 #define SO_RCVTIMEO	0x1006		/* receive timeout */
 #define	SO_ERROR	0x1007		/* get error status and clear */
 #define	SO_TYPE		0x1008		/* get socket type */
+#endif
 
 /* Extra options for Helios */
 #define	SO_HOSTID	0x8001		/* Host Id (system level)	*/
 #define	SO_HOSTNAME	0x8002		/* Host Name (system level)	*/
+#if !defined(UNIX)
 #define SO_PEERNAME	0x8003		/* Peer name (Get only)		*/
+#endif
 #define SO_SOCKNAME	0x8004		/* socket name (Get only)	*/
 
 #endif

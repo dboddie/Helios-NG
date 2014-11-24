@@ -26,8 +26,8 @@
 #include "helios.h"
 
 #include <stdlib.h>
-#include <sys\types.h>
-#include <sys\stat.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 /*{{{  description */
 /**

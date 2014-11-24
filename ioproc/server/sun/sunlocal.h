@@ -51,7 +51,9 @@ typedef long clock_t;
 #define SEEK_SET	0
 #endif
 
+#if !defined(LINUX)
 extern char *sys_errlist[];
+#endif
 extern int  sys_nerr;
 
 /**
