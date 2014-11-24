@@ -71,11 +71,11 @@ SOURCES.odd	= makefile
 #-----------------------------------------------------------------------------
 # Native Host targets and their dependencies:
 
-HOSTCFLAGS  := -pipe -O -DHOSTISLITTLEENDIAN -DLINUX -D__TRAN -D__HELIOSTRAN -w -I/usr/include -I. -I.. -I../../support -I$(INCLUDE) -DVM
+HOSTCFLAGS  := -pipe -O -DHOSTISLITTLEENDIAN -DLINUX -D__TRAN -D__HELIOSTRAN -w -I/usr/include -I. -I.. -I../../support -I$(HOSTINCLUDE) -DVM -D__STDC__
 HOSTCC = gcc 
 # AM chaged from cc to gcc
 
-LOCALHOSTCFLAGS  := -pipe -O1 -DHOSTISLITTLEENDIAN -w -I/usr/include -I. -I.. -I../../support -I$(INCLUDE) -DVM
+LOCALHOSTCFLAGS  := -pipe -O1 -DHOSTISLITTLEENDIAN -w -I/usr/include -I. -I.. -I../../support -I$(INCLUDE) -DVM -D__STDC__
 
 $(OBJECTS) : asm.h vm.h
 	
@@ -91,7 +91,8 @@ objdump : objdump.c
 	$(HOSTCC) $< $(HOSTCFLAGS) -Bstatic -o objdump
 
 asm :	$(OBJECTS) keytab.c
-	$(HOSTCC) -Bstatic -o asm $(HOSTCFLAGS) $(SOURCES)
+	$(HOSTCC) -Bstatic -c $(HOSTCFLAGS) $(SOURCES)
+	ld -o asm *.o -lm
 
 
 #-----------------------------------------------------------------------------

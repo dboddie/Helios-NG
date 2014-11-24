@@ -25,6 +25,7 @@
 #endif
 
 #if defined(LINUX)
+#include <errno.h>
 #include <fcntl.h>
 #include <module.h>
 #endif
@@ -44,7 +45,7 @@
 # define word		WORD
 static int oserr;
 # define wordlen(s) (((s)+3)&~3)
-#ifndef __DOS386
+#if !defined(__DOS386) && !defined(LINUX)
 extern int errno;
 # define SEEK_SET	0
 # define memcpy(s,d,z) bcopy(d,s,z)

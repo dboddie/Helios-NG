@@ -32,10 +32,14 @@ UBYTE *lmalloc();
 UBYTE *getml();
 #define MALLOC(n) (UBYTE *)getml(n)
 #else
-#ifdef __STDC__
-void *malloc(int n);
+#if defined(LINUX)
+  #include <stdlib.h>
 #else
-byte *malloc();
+  #ifdef __STDC__
+  void *malloc(int n);
+  #else
+  byte *malloc();
+  #endif
 #endif
 #define MALLOC(n) (UBYTE *)malloc(n)
 #endif

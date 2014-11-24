@@ -9,7 +9,7 @@
 
 /* do NOT include asm.h */
 
-#if defined(SUN4) || defined(RS6000) || defined (__DOS386)
+#if defined(SUN4) || defined(RS6000) || defined (__DOS386) || defined(LINUX)
 #include <stdio.h>
 #include "ttypes.h"
 #ifndef __helios_h
@@ -17,14 +17,19 @@
 #endif
 #include <module.h>
 
-#ifndef __DOS386
+#if !defined(__DOS386) && !defined(LINUX)
 #include <sys/file.h>
 #ifndef SEEK_SET
 #define SEEK_SET L_SET
 #endif
 #endif /* __DOS386 */
 
+#if defined(LINUX)
+#include <errno.h>
+#else
 extern int errno;
+#endif
+
 #else
 #include <stdio.h>
 #include <module.h>
