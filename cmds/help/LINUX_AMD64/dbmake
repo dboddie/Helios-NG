@@ -1,0 +1,4 @@
+#!/bin/sh
+export HELP_DBPATH=$1
+./dbbuild $2 0
+exit $status

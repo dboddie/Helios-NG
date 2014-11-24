@@ -337,7 +337,7 @@ static int 	fn( tab, (void));
 static void 	fn( skip_to_marker, (void));
 static int 	fn( display_word, (u_char *p));
 static int 	fn( newline, (void));
-static u_char *	fn( getline, (u_char *p, int echo));
+static u_char *	fn( _getline, (u_char *p, int echo));
 static int 	fn( space, (void));
 static void 	fn( clean_up, (char *p));
 static void 	fn( add_xref, (u_char *p, long docn));
@@ -560,7 +560,7 @@ char **argv;
 				printf("Enter search term - ");
 				fflush(stdout);
 
-				if(getline(buff, TRUE) == (u_char *) NULL)
+				if(_getline(buff, TRUE) == (u_char *) NULL)
 					clean_up((char *)0);
 
 				if(!buff[0])
@@ -604,7 +604,7 @@ char **argv;
 					printf(CLEAR_TO_EOL);
 					printf("Press RETURN to continue ");
 					fflush(stdout);
-					if(getline(buff, FALSE)
+					if(_getline(buff, FALSE)
 						        == (u_char *) NULL)
 						clean_up((char *)0);
 					status = GOBACK;
@@ -1092,6 +1092,10 @@ static void screen_size(void)
 #include <sys/ioctl.h>
 
 #ifdef _INCLUDE_HPUX_SOURCE
+#include <sgtty.h>
+#endif
+
+#if defined(LINUX)
 #include <sgtty.h>
 #endif
 
@@ -1874,7 +1878,7 @@ int bits;
 					printf("Enter search term - ");
 					fflush(stdout);
 
-					if(getline((u_char *)buff, TRUE) ==
+					if(_getline((u_char *)buff, TRUE) ==
 							(u_char *) NULL)
 						clean_up((char *)0);
 
@@ -1914,7 +1918,7 @@ int bits;
 
 	/* get a line of data from the user. Take care of backspace, etc */
 
-static u_char *getline(p, echo)
+static u_char *_getline(p, echo)
 u_char *p;
 int echo;
 {

@@ -24,7 +24,9 @@
 static char sccsid[] = "@(#)storage.c	5.1 (Berkeley) 1/23/91";
 #endif /* LIBC_SCCS and not lint */
 
+#if !defined(LINUX)
 #include <sys/param.h>
+#endif
 #include <sys/types.h>
 #include <errno.h>
 #include <sys/file.h>

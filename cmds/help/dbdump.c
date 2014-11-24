@@ -20,6 +20,9 @@ static char *rcsid = "$Id: dbdump.c,v 1.2 1994/05/12 13:46:06 nickc Exp $";
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/file.h>
+#if defined(LINUX)
+#include <sys/types.h>
+#endif
 #include <errno.h>
 #include <signal.h>
 #include <limits.h>

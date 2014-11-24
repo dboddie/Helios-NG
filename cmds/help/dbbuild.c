@@ -184,7 +184,7 @@ static int	fn( check_dups, (u_char *cur_data, struct indexword *new_data));
 static void	fn( insert_btree, ( struct indexword *bb));
 static void	fn( err, (char *p, int action));
 static void	fn( usage, (void));
-static int	fn( getline, (u_char *buff));
+static int	fn( _getline, (u_char *buff));
 static void	fn( putword, (u_char *p));
 static void	fn( putline, (int indexflag, u_char *p));
 static void	fn( add_subject, (u_char *w));
@@ -298,7 +298,7 @@ char **argv;
 
 	initialise();			/* signals */
 
-	while(getline(buff))
+	while(_getline(buff))
 		{
 		if(signal_caught)	/* safe to exit at this point */
 			clean_up();
@@ -630,7 +630,7 @@ u_char *p;
 	putc(ENDLINE, fdtxt);
 }
 
-static int getline(buff)
+static int _getline(buff)
 u_char *buff;
 {
 	u_char *p = buff;

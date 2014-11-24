@@ -24,6 +24,10 @@
 static char sccsid[] = "@(#)lrutils.c	5.1 (Berkeley) 1/23/91";
 #endif /* LIBC_SCCS and not lint */
 
+#if defined(LINUX)
+#include <stddef.h>
+#endif
+
 #include <sys/types.h>
 #include "lrucache.h"
 

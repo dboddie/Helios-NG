@@ -22,11 +22,11 @@
 #ifndef _DB_H_
 #define	_DB_H_
 
-#ifdef __HELIOS
+#if defined(__HELIOS) || defined(LINUX)
 #include <stddef.h>
 #endif
 
-#ifdef RS6000
+#if defined(RS6000) || defined(LINUX)
 #include <sys/types.h>
 #endif
 
