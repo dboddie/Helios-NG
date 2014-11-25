@@ -860,12 +860,12 @@ HostYacc:
     endif
 
 HostLink:
-	ifeq ($(HHOST),HELIOSC40)
-		@echo "			[[[ Skipping HOST linker ]]]"
-	else
-		@echo "			[[[ Making HOST linker ]]]"
-		$(MAKE) -C cmds/linker/$(HHOST) install
-	endif
+ifeq ($(HHOST),HELIOSC40)
+	@echo "			[[[ Skipping HOST linker ]]]"
+else
+	@echo "			[[[ Making HOST linker ]]]"
+	$(MAKE) -C cmds/linker/$(HHOST) install
+endif
 
 HostIOS:
 ifeq ($(HHOST),HP)
@@ -877,8 +877,12 @@ else
     ifeq ($(HHOST),HELIOSC40)
 	@echo "				[[[ Skipping HOST IO Server ]]]"
     else
+    ifeq ($(HHOST),LINUX_AMD64)
+	@echo "				[[[ Skipping HOST IO Server ]]]"
+    else
 	@echo "				[[[ Making HOST IO Server ]]]"
 	$(MAKE) -C ioproc/server/$(HHOST) install
+    endif
     endif
     endif
 endif
