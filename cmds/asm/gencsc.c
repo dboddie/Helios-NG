@@ -38,7 +38,7 @@ PRIVATE putitem(op, opd);
 PRIVATE putstep(opd);
 PRIVATE outword(val);
 
-extern Code* codebase;
+Code* codebase = 0;
 
 /****************************************************************/
 /* Procedure: gencsc                                            */

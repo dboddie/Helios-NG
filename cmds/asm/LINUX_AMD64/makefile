@@ -58,7 +58,7 @@ OBJECTS		=  asm.o gencode.o genimage.o growdata.o growcode.o keytab.o \
 # C source files
 SOURCES.c	= ../asm.c ../gencode.c ../genimage.c ../gencsc.c ../growcode.c keytab.c \
 		../objed.c ../lex.c ../mem.c ../module.c ../preasm.c ../sym.c ../syn.c ../encode.c \
-		../vm.c ../growdata.c
+		../vm.c ../growdata.c ../../support/getargs.c
 
 # C header files
 HEADERS.c	= ../asm.h ../vm.h
