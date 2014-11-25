@@ -45,7 +45,11 @@ int	ShowOnly = FALSE;
 
 char *	ProgName;
 
+#if defined(__STDC__)
+#define DebugStream stderr
+#else
 FILE *	DebugStream = stderr;
+#endif
 
 /*}}}*/
 
@@ -301,7 +305,9 @@ setup (int	argc,
 		  break;
 		  
 		case 'D':
+#if !defined(__STDC__)
 		  DebugStream = stdout;
+#endif
 		case 'd':
 		  Debug = !Debug;
 		  

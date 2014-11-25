@@ -18,23 +18,24 @@
 
 #ifdef UNIX
 
-#include "/usr/include/stdio.h"
-#include "/usr/include/stdlib.h"
-#include "/usr/include/string.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
 
-#include "/usr/include/sys/types.h"
+#include "sys/types.h"
 
-#include "/usr/include/dirent.h"
+#include "dirent.h"
 
-#include "/usr/include/sys/stat.h"
+#include "sys/stat.h"
 
-#include "/hsrc/include/memory.h"
-#include "/hsrc/include/nonansi.h"
-#include "/hsrc/include/servlib.h"
-#include "/hsrc/include/syslib.h"
-#include "/hsrc/include/queue.h"
-#include "/hsrc/include/gsp.h"
-#include "/hsrc/include/module.h"
+/* hsrc includes */
+#include "memory.h"
+#include "nonansi.h"
+#include "servlib.h"
+#include "syslib.h"
+#include "queue.h"
+#include "gsp.h"
+#include "module.h"
 
 #ifndef SEEK_SET
 #define SEEK_SET 0

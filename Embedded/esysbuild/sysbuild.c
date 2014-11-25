@@ -55,6 +55,7 @@ FILE *		 outfd;
 
 /*{{{  Code */
 
+#if !defined(LINUX)
 /*{{{  swap() */
 
 WORD
@@ -73,6 +74,7 @@ swap(WORD x )
  return x;
 #endif
 }
+#endif
 
 /*}}}*/
 /*{{{  main() */
