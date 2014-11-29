@@ -236,10 +236,13 @@ void _pop_trace()
 	}
 }
 
-
+#ifdef __STDC__
+void trace(char *str, ...)
+#else
 void trace(str,va_alist)
 char *str;
 va_dcl
+#endif
 {
 	int i = tracelevel;
 	va_list a;
@@ -1147,9 +1150,13 @@ int word;
 #endif
 }
 
+#ifdef __STDC__
+void aprintf(char *str, ...)
+#else
 void aprintf(str, va_alist)
 char *str;
 va_dcl
+#endif
 {
 	va_list a;
 	start_args(a, str);

@@ -43,9 +43,13 @@ struct stdef
 } *stlist;
 
 
+#ifdef __STDC__
+void dbprintf(char *fmt, ...)
+#else
 void dbprintf(fmt, va_alist )
 char *fmt;
 va_dcl
+#endif
 {
 	va_list a;
 	

@@ -14,6 +14,9 @@ static int fpargs[20];
 
 int _vfprintf(fd,str,a) 
 FILE  *fd;
+#if defined(__STDC__)
+const
+#endif
 char *str;
 va_list a;
 {

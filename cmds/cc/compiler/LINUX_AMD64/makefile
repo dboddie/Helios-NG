@@ -1,9 +1,9 @@
 #------------------------------------------------------------------------------
 # Helios generic make system - NATIVE HOST MAKEFILE -
 #-----------------------------------------------------------------------------
-# LINUX Host specific make rules to make NATIVE HOST version of ASM component.
+# YYY Host specific make rules to make NATIVE HOST version of XXX component.
 #
-# File: /HSRC/cmds/asm/LINUX/makefile
+# File: /HSRC/XXX/YYY/makefile
 #
 # This file contains ALL the definitions and rules that are
 # required to make a NATIVE HOST version of this component.
@@ -13,14 +13,15 @@
 # All host specific source files should be kept here.
 # All intermediate, object and binary files should be made in here.
 #
-# RcsId: $Id: makefile,v 1.9 1992/11/02 12:46:35 martyn Exp $
+# SccsId: %W% %G%
+# RcsId: $Id: makefile,v 1.6 1992/10/16 15:26:12 martyn Exp $
 #		(C) Copyright 1990 Perihelion Software
 #
 # WARNING: assumes you are using GNUmake.
 #-----------------------------------------------------------------------------
 # Manditory variables for a component:
 # name of COMPONENT directory relative to $(HSRC)
-COMPONENT = cmds/asm
+COMPONENT = cmds/cc/compiler
 
 # Manditory includes
 include $(HSRC)/makeinc/$(HHOST).mak	# Default host system variables
@@ -31,38 +32,36 @@ include $(HSRC)/makeinc/$(HHOST).mak	# Default host system variables
 # "install" - copy the new component to $(HHOSTBIN) directory
 # "clean"   - remove all intermediate and executable files from host subdir
 
-VPATH := $(HSRC)/$(COMPONENT):../../support
+VPATH := $(HSRC)/$(COMPONENT)
 
 #-----------------------------------------------------------------------------
 # Note all final targets here
 
-TARGETS = asm objdump
+TARGETS = nc
 
 default : $(TARGETS)
 
 install	: $(TARGETS)
-	$(CP) $(TARGETS) $(HHOSTBIN)
+	$(CP) nc $(HHOSTBIN)/nc
 	$(TOUCH) install
-
 clean	:
-	-$(RM) keyform keytab.c $(OBJECTS) $(TARGETS) mkout core ../mkout install
+	-$(RM)	$(OBJECTS) $(TARGETS) mkout core ../mkout install
 
 # Note all sources
-SOURCES		= $(SOURCES.c) $(HEADERS.c) # $(SOURCES.odd)
+SOURCES		= $(SOURCES.c) $(HEADERS.c) $(SOURCES.odd)
 
-# Object files ( Note that keytab.c is created from keyform.c)
-OBJECTS		=  asm.o gencode.o genimage.o growdata.o growcode.o keytab.o \
-		objed.o	lex.o encode.o mem.o module.o preasm.o sym.o syn.o \
-		vm.o queue.o getargs.o
+# Object files
+OBJECTS		= $(SOURCES.c:.c=.o)
 
 # C source files
-SOURCES.c	= ../asm.c ../gencode.c ../genimage.c ../gencsc.c ../growcode.c keytab.c \
-		../objed.c ../lex.c ../mem.c ../module.c ../preasm.c ../sym.c ../syn.c ../encode.c \
-		../vm.c ../growdata.c ../../support/getargs.c
+SOURCES.c	= bind.c builtin.c driver.c stubs.c pp.c preparse.c \
+		  debug.c lex.c misc.c IEEEflt.c cg.c cg1.c cg2.c emit.c \
+		  sem.c syn.c synprint.c vargen.c showcode.c optimise.c \
+		  getargs.c
 
 # C header files
-HEADERS.c	= ../asm.h ../vm.h
-
+HEADERS.c	= AEops.h cchdr.h cg.h modes.h system.h util.h xpuops.h \
+		  xpuspec.h xrefs.h
 
 # Any other source files
 SOURCES.odd	= makefile
@@ -71,28 +70,18 @@ SOURCES.odd	= makefile
 #-----------------------------------------------------------------------------
 # Native Host targets and their dependencies:
 
-HOSTCFLAGS  := -pipe -O -DHOSTISLITTLEENDIAN -DLINUX -D__TRAN -D__HELIOSTRAN -w -I/usr/include -I. -I.. -I../../support -I$(HOSTINCLUDE) -DVM -D__STDC__
-HOSTCC = gcc 
-# AM chaged from cc to gcc
+# uncomment if you have compiler or makedepend generated dependencies
+#include depends
 
-LOCALHOSTCFLAGS  := -pipe -O1 -DHOSTISLITTLEENDIAN -w -I/usr/include -I. -I.. -I../../support -I$(INCLUDE) -DVM -D__STDC__
+DEFINES := $(DEFINES) -DTARGET_IS_XPUTER -DOFFSETOF_FIX -DDBX -DNEWCAST
+DEFINES := $(DEFINES) -DCOMPILING_ON_LINUX -D__STDC__
 
-$(OBJECTS) : asm.h vm.h
-	
-#keytab.o : keyform.o keyform keytab.c 
+HOSTCC = gcc
+HOSTCFLAGS := -w -I. -I.. -Iinclude $(DEFINES)
 
-keytab.c : keyform
-	$(HSRC)/$(COMPONENT)/$(HHOST)/keyform
+nc : $(OBJECTS)
+	gcc -Bstatic -o nc $(OBJECTS)
 
-keyform : keyform.c
-	$(HOSTCC) $< $(HOSTCFLAGS) -DSWAPKEYTABLE -Bstatic -o keyform
-
-objdump : objdump.c
-	$(HOSTCC) $< $(HOSTCFLAGS) -Bstatic -o objdump
-
-asm :	$(OBJECTS) keytab.c
-	$(HOSTCC) -Bstatic -c $(HOSTCFLAGS) $(SOURCES)
-	ld -o asm *.o -lm
 
 
 #-----------------------------------------------------------------------------

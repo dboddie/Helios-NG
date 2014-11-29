@@ -35,9 +35,13 @@ static void pr_list();
 
 static int position;
 
+#ifdef __STDC__
+void eprintf(char *s, ...)
+#else
 void eprintf(s, va_alist)
 char *s;
 va_dcl
+#endif
 {   va_list ap;
     start_args(ap, s);
     position += _vfprintf(stderr,s,ap);

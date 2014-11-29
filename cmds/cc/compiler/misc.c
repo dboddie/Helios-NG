@@ -267,9 +267,13 @@ va_list a;
     }
 }
 
+#ifdef __STDC__
+void syserr(char *s, ...)
+#else
 void syserr(s, va_alist)
 char *s;
 va_dcl
+#endif
 {
     va_list a;
     start_args( a, s);
@@ -297,9 +301,13 @@ fprintf(stderr,"\
     exit(1);
 }
 
+#ifdef __STDC__
+void cc_fatalerr(char *s, ...)
+#else
 void cc_fatalerr(s, va_alist)
 char *s;
 va_dcl
+#endif
 {
     va_list a;
     start_args(a, s);
@@ -314,9 +322,13 @@ va_dcl
     exit(1);
 }
 
+#ifdef __STDC__
+void cc_warn(char *s, ...)
+#else
 void cc_warn(s, va_alist)
 char *s;
 va_dcl
+#endif
 {
     va_list a;
     start_args(a, s);
@@ -327,9 +339,13 @@ va_dcl
     fprintf(stderr, "\n");
 }
 
+#ifdef __STDC__
+void cc_rerr(char *s, ...)
+#else
 void cc_rerr(s, va_alist)
 char *s;
 va_dcl
+#endif
 {
     va_list a;
     start_args(a, s);
@@ -340,9 +356,13 @@ va_dcl
     fprintf(stderr, "\n");
 }
 
+#ifdef __STDC__
+void cc_err(char *s, ...)
+#else
 void cc_err(s, va_alist)
 char *s;
 va_dcl
+#endif
 {
     va_list a;
     start_args(a, s);

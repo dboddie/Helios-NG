@@ -103,6 +103,13 @@
 #  define PP_ROOTEDFILE(file) (*(file) == '/')
 #  define PP_INCOREFILE(file) (*(file) == ':' ? file+1 : 0)
 #endif
+#ifdef COMPILING_ON_LINUX   /* First approximation of unix behaviour */
+#  define PP_SYSAREA "/giga/Norcroft/include/"
+#  define PP_USERAREA ","
+#  define PP_DIRCHAR '/'
+#  define PP_ROOTEDFILE(file) (*(file) == '/')
+#  define PP_INCOREFILE(file) (*(file) == ':' ? file+1 : 0)
+#endif
 
 #ifdef PASCAL
 #  define FILE_EXTENSION 'p'

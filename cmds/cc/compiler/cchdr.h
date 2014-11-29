@@ -101,11 +101,13 @@ extern void cc_warn(char *s, ...);
 extern void cc_err(char *s, ...);
 extern void cc_rerr(char *s, ...);
 #else
+#if !defined(__STDC__)
 extern void syserr();
 extern void cc_fatalerr();
 extern void cc_warn();
 extern void cc_err();
 extern void cc_rerr();
+#endif
 #endif
 
 #define sem_warn cc_warn
@@ -223,7 +225,9 @@ extern void lex_init();
 #ifdef __DOS386
 extern void eprintf(char *s, ...);
 #else
+#if !defined(__STDC__)
 extern void eprintf();
+#endif
 #endif
 extern void pr_id();
 extern void pr_expr();
