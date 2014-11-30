@@ -92,7 +92,7 @@ objdump : objdump.c
 
 asm :	$(OBJECTS) keytab.c
 	$(HOSTCC) -Bstatic -c $(HOSTCFLAGS) $(SOURCES)
-	ld -o asm *.o -lm
+	gcc -o asm *.o -lm
 
 
 #-----------------------------------------------------------------------------
