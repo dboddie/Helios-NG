@@ -65,7 +65,7 @@ LINKFLAGS	:= $(LINKFLAGS)
 # Library modules
 %.p : %.c
 	$(NC) -r $(NCFLAGS) $< -s$(TEMP)/$(notdir $*.s)
-	$(ASM) $(ASMFLAGS) -o $*.p $(TEMP)/$(notdir $*.s)
+	$(ASM) $(ASMFLAGS) > $*.p < $(TEMP)/$(notdir $*.s)
 	-$(RMTEMP) $(TEMP)/$(notdir $*.s)
 
 # Device Drivers
@@ -88,7 +88,7 @@ LINKFLAGS	:= $(LINKFLAGS)
 
 %.p : %.a
 	$(AMPP) $(AMPPFLAGS) -o$(TEMP)/$(notdir $*.s) $(MACRO)/basic.m $<
-	$(ASM) $(ASMFLAGS) -o$*.p $(TEMP)/$(notdir $*.s)
+	$(ASM) $(ASMFLAGS) > $*.p < $(TEMP)/$(notdir $*.s)
 	-$(RMTEMP) $(TEMP)/$(notdir $*.s)
 
 %.q : %.a

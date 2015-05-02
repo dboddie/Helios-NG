@@ -199,8 +199,8 @@ clib.def : clibstar.a
 
 ifeq ($(HPROC),TRAN)
 cstart.o: c0.o
-	asm -p -o cstart.o		\
-		$(LIB)/c0.o		\
+	$(ASM) -p > cstart.o		\
+		< $(LIB)/c0.o		\
 		$(LIB)/kernel.def	\
 		$(LIB)/syslib.def	\
 		$(LIB)/util.def		\

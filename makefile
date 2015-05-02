@@ -957,8 +957,8 @@ endif
 Linklibs: 
 	@echo "				[[[ Making shared link libraries ]]]"
 ifeq ($(HPROC),TRAN)		# use tokenised assembler
-	asm -p -o $(LIB)/helios.lib	\
-		$(LIB)/kernel.def	\
+	$(ASM) -p > $(LIB)/helios.lib	\
+		< $(LIB)/kernel.def	\
 		$(LIB)/syslib.def	\
 		$(LIB)/util.def		\
 		$(LIB)/servlib.def	\
@@ -966,8 +966,8 @@ ifeq ($(HPROC),TRAN)		# use tokenised assembler
 		$(LIB)/fplib.def	\
 		$(LIB)/posix.def
 ifndef NUC_LIC
-	asm -p -o $(LIB)/c.lib		\
-		$(LIB)/clib.def		\
+	$(ASM) -p > $(LIB)/c.lib		\
+		< $(LIB)/clib.def		\
 		$(LIB)/fpclib.def	
 endif
 else
