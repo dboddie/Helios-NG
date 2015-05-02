@@ -458,11 +458,11 @@ ifeq ($(HPROC),TRAN)
 # s0.o is server startup object code. sstart.o holds s0.o + lib resrefs
 sstart.o : sstart.a $(LIBDEFS)
 	$(AMPP) $(AMPPFLAGS) -o$(TEMP)/x -i$(MACRO)/ $(MACRO)/basic.m $< 
-	$(ASM) -p $(TEMP)/x $(LIBDEFS) -o$@
+	$(ASM) -p < $(TEMP)/x $(LIBDEFS) > $@
 
 s0.o 	: sstart.a
 	$(AMPP) $(AMPPFLAGS) -o$(TEMP)/x -i$(MACRO)/ $(MACRO)/basic.m $< 
-	$(ASM) -p $(TEMP)/x -o$@
+	$(ASM) -p < $(TEMP)/x > $@
 
 else
 

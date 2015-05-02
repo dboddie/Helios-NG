@@ -354,13 +354,13 @@ trapdefs.m:  kmodule.a
 trapinit.p:  kmodule.a armexec.m
 	$(AMPP) -dmake.traps 1 $(AMPPFLAGS) $(MACRO)/basic.m ../kmodule.a > trapinit.a
 	$(AMPP) $(AMPPFLAGS) $(MACRO)/basic.m trapinit.a > $(TEMP)/trapinit.s
-	$(ASM) $(ASMFLAGS) -o$@ $(TEMP)/trapinit.s
+	$(ASM) $(ASMFLAGS) > $@ < $(TEMP)/trapinit.s
 
 # automatically produce the trap stubs (temporary fix)
 trapstubs.p:  kmodule.a trapdefs.m
 	$(AMPP) -dmake.trapstubs 1 $(AMPPFLAGS) $(MACRO)/basic.m ../kmodule.a > trapstubs.a
 	$(AMPP) $(AMPPFLAGS) $(MACRO)/basic.m trapstubs.a > $(TEMP)/trapstubs.s
-	$(ASM) $(ASMFLAGS) -o$@ $(TEMP)/trapstubs.s
+	$(ASM) $(ASMFLAGS) > $@ < $(TEMP)/trapstubs.s
 endif
 
 

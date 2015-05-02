@@ -112,7 +112,7 @@ LINKFLAGS	:= $(LINKFLAGS)
 # Making library definition files
 define MAKE.DEF
 	$(AMPP) -dmake.def 1 $(AMPPFLAGS) -o$(TEMP)/def.s $(MACRO)/basic.m $^
-	$(ASM) $(ASMFLAGS) -o$@ $(TEMP)/def.s
+	$(ASM) $(ASMFLAGS) > $@ < $(TEMP)/def.s
 	-$(RMTEMP) $(TEMP)/def.s
 endef
 
